@@ -1,0 +1,26 @@
+artifact_path: file:///C:/Users/%C3%81lvaro%20Franco/Desktop/tese/sentiment_analysis/mlruns/199821640732395452/models/m-adb080914cf741aa8029bf519535ea5b/artifacts
+flavors:
+  python_function:
+    artifacts:
+      keras_model:
+        path: artifacts\sentiment_model.keras
+        uri: models/sentiment_model.keras
+      tokenizer:
+        path: artifacts\tokenizer.pkl
+        uri: models/tokenizer.pkl
+    cloudpickle_version: 3.1.2
+    code: code
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pyfunc.model
+    python_model: python_model.pkl
+    python_version: 3.10.11
+    streamable: false
+mlflow_version: 3.5.0
+model_id: m-adb080914cf741aa8029bf519535ea5b
+model_size_bytes: 8741997
+model_uuid: m-adb080914cf741aa8029bf519535ea5b
+prompts: null
+run_id: 621fd5b3f9b04aa28da8ed13f93595c3
+utc_time_created: '2026-03-17 15:47:41.285432'
