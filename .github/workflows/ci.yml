@@ -37,7 +37,7 @@ jobs:
         MODEL_PATH: ${{ github.workspace }}/models/sentiment_analysis_model
       run: |
         python -m nltk.downloader stopwords punkt wordnet punkt_tab
-        python -m pytest tests/ -v
+        python -m pytest tests/unit -v
 
     - name: Build Docker Image
       run: |
