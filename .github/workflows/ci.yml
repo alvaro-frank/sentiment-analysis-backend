@@ -1,0 +1,43 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest httpx
+        pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: |
+        # Para o build se houver erros de sintaxe Python ou símbolos indefinidos
+        flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Run Unit and Integration Tests
+      env:
+        PYTHONPATH: .
+        MODEL_PATH: models/sentiment_analysis_model
+      run: |
+        python -m pytest tests/ -v
+
+    - name: Build Docker Image
+      run: |
+        docker build . --file Dockerfile --tag sentiment-backend:test
