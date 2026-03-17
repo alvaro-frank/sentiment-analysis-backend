@@ -34,8 +34,9 @@ jobs:
     - name: Run Unit and Integration Tests
       env:
         PYTHONPATH: .
-        MODEL_PATH: models/sentiment_analysis_model
+        MODEL_PATH: ${{ github.workspace }}/models/sentiment_analysis_model
       run: |
+        python -m nltk.downloader stopwords punkt wordnet punkt_tab
         python -m pytest tests/ -v
 
     - name: Build Docker Image
