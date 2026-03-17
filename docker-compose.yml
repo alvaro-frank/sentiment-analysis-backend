@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  sentiment-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentiment-backend-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./models:/app/models
+    environment:
+      - ENV=development
+      - PYTHONPATH=/app
+      - MODEL_PATH=models/sentiment_analysis_model
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - TF_CPP_MIN_LOG_LEVEL=2
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
